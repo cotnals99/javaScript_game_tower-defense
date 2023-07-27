@@ -64,20 +64,39 @@ class Enemy {
 
 // let x = 200
 
-const enemy = new Enemy({
-    position: {
-        x: waypoints[0].x,
-        y: waypoints[0].y
-    },
-    width: 100,
-    height: 100
-})
+// Fixed Enemy spawn
+// const enemy = new Enemy({
+//     position: {
+//         x: waypoints[0].x,
+//         y: waypoints[0].y
+//     },
+//     width: 100,
+//     height: 100
+// })
+
+
+// Multiple enemies
+
+const enemies = []
+for ( let i =1; i<10; i++ ){
+    const xOffset = i * 150
+    enemies.push(new Enemy({
+        position: {
+            x: waypoints[0].x - xOffset,
+            y: waypoints[0].y
+        },
+        width: 100,
+        height: 100
+    }))
+}
+
+
 
 function animate(){
     window.requestAnimationFrame(animate)
     c.drawImage(image, 0, 0)
 
-    enemy.update()
+    enemies.forEach(enemy => enemy.update())
 
     // c.fillStyle='red'
     // c.fillRect(x, 400, 100, 100)
