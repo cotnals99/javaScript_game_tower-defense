@@ -56,6 +56,7 @@ image.src = "../img/gameMap.png";
 // Multiple enemies
 
 const enemies = [];
+
 for (let i = 1; i < 10; i++) {
   const xOffset = i * 150;
   enemies.push(
@@ -98,7 +99,20 @@ function animate() {
     // });
 
     // Using For loop
-    building.draw();
+    // building.draw();
+    building.update()
+
+    building.target = null
+    const validEnemies = enemies.filter(enemy => {
+      const xDifference = enemy.center.x - building.center.x;
+      const yDifference = enemy.center.y - building.center.y;
+      const distance = Math.hypot(xDifference, yDifference);
+      return distance < enemy.radius + building.radius
+    })
+    building.target = validEnemies[0]
+    console.log(validEnemies)
+
+
     for (let i = building.projectiles.length - 1; i >= 0; i--) {
       const projectile = building.projectiles[i];
       projectile.update();
