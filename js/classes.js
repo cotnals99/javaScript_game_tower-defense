@@ -32,18 +32,19 @@ class PlacementTile {
 //Enemy
 class Enemy {
   constructor({ position, width, height }) {
-    (this.position = {
+    this.position = {
       x: position.x,
       y: position.y,
-    }),
-      (this.width = width);
-    this.height = height;
-    this.waypointIndex = 0;
+    }
+    this.width = width
+    this.height = height
+    this.waypointIndex = 0
     this.center = {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2,
-    };
-    this.radius = 50;
+    }
+    this.radius = 50
+    this.health = 100
   }
 
   draw() {
@@ -51,7 +52,15 @@ class Enemy {
     // c.fillRect(this.position.x, this.position.y, this.width, this.height);
     c.beginPath();
     c.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2);
-    c.fill();
+    c.fill()
+
+
+    //healthBar
+    c.fillStyle = 'red'
+    c.fillRect(this.position.x, this.position.y - 15, this.width, 10  )
+
+    c.fillStyle = 'green'
+    c.fillRect(this.position.x, this.position.y - 15, this.width * this.health / 100, 10  )
   }
 
   update() {

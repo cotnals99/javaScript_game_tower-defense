@@ -79,7 +79,11 @@ function animate() {
   window.requestAnimationFrame(animate);
   c.drawImage(image, 0, 0);
 
-  enemies.forEach((enemy) => enemy.update());
+  for (let i = enemies.length - 1 ; i >= 0; i--){
+    const enemy = enemies[i]
+    enemy.update()
+  }
+  // enemies.forEach((enemy) => enemy.update());
 
   placementTiles.forEach((tile) => tile.update(mouse));
 
@@ -110,7 +114,7 @@ function animate() {
       return distance < enemy.radius + building.radius
     })
     building.target = validEnemies[0]
-    console.log(validEnemies)
+    // console.log(validEnemies)
 
 
     for (let i = building.projectiles.length - 1; i >= 0; i--) {
@@ -120,7 +124,21 @@ function animate() {
       const xDifference = projectile.enemy.center.x - projectile.position.x;
       const yDifference = projectile.enemy.center.y - projectile.position.y;
       const distance = Math.hypot(xDifference, yDifference);
+
+
+      //This is when a projectile hits an enemy
       if (distance < projectile.enemy.radius + projectile.radius) {
+        projectile.enemy.health -= 20
+        // console.log(projectile.enemy.health)
+        if(projectile.enemy.health <= 0) {
+          const enemyIndex = enemies.findIndex((enemy) => {
+            return projectile.enemy === enemy
+          })
+
+          //If multiple projectiles shoot the enemy, enemy might be dead before some projectiles hit the enemy
+          // In this case, enemy index will show negative 1
+          if (enemyIndex > -1) enemies.splice(enemyIndex, 1)
+        }
         building.projectiles.splice(i, 1);
       }
     }
