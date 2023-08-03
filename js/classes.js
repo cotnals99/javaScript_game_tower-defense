@@ -23,7 +23,7 @@ class PlacementTile {
       mouse.y > this.position.y &&
       mouse.y < this.position.y + this.size
     ) {
-      console.log("Collide");
+      // console.log("Collide");
       this.color = "white";
     } else this.color = "rgba(255, 255, 255, 0.15)";
   }
@@ -82,17 +82,19 @@ class Enemy {
 
 
 class Projectile {
-    constructor({position={x:0, y:0}}){
+    constructor({position={x:0, y:0}, enemy}){
         this.position = position
         this.velocity = {
             x: 0,
             y: 0
-        }
+        },
+        this.enemy = enemy
+        this.radius = 10
     }
 
     draw(){
         c.beginPath()
-        c.arc(this.position.x, this.position.y, 10, 0, Math.PI * 2)
+        c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
         c.fillStyle = 'orange'
         c.fill()
     }
@@ -104,8 +106,10 @@ class Projectile {
             enemies[0].center.y - this.position.y,
             enemies[0].center.x - this.position.x
         )
-        this.velocity.x = Math.cos(angle)
-        this.velocity.y = Math.sin(angle)
+
+        const power = 5
+        this.velocity.x = Math.cos(angle) * power
+        this.velocity.y = Math.sin(angle) * power
 
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
@@ -128,7 +132,8 @@ class Building {
             position: {
                 x: this.center.x,
                 y: this.center.y
-            }
+            },
+            enemy: enemies[0]
         })
     ]
   }

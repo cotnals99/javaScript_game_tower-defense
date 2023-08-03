@@ -7,7 +7,6 @@ canvas.height = 768;
 c.fillStyle = "white";
 c.fillRect(0, 0, canvas.width, canvas.height);
 
-
 const placementTilesData2D = [];
 
 for (let i = 0; i < placementTilesData.length; i += 20) {
@@ -54,10 +53,6 @@ image.onload = () => {
 };
 image.src = "../img/gameMap.png";
 
-
-
-
-
 // Multiple enemies
 
 const enemies = [];
@@ -87,17 +82,40 @@ function animate() {
 
   placementTiles.forEach((tile) => tile.update(mouse));
 
+  // Using forEach loop
   buildings.forEach((building) => {
-    building.draw()
-    building.projectiles.forEach((projectile) => {
-      projectile.update()
-    });
-  });
+    //   building.draw()
+    //   building.projectiles.forEach((projectile, i) => {
+    //     projectile.update()
 
-  // c.fillStyle='red'
-  // c.fillRect(x, 400, 100, 100)
-  // x++
-  // console.log('go')
+    //     const xDifference = projectile.enemy.center.x - projectile.position.x
+    //     const yDifference = projectile.enemy.center.y - projectile.position.y
+    //     const distance = Math.hypot(xDifference, yDifference)
+    //     if(distance < projectile.enemy.radius + projectile.radius){
+    //       building.projectiles.splice(i, 1)
+    //     }
+    //   });
+    // });
+
+    // Using For loop
+    building.draw();
+    for (let i = building.projectiles.length - 1; i >= 0; i--) {
+      const projectile = building.projectiles[i];
+      projectile.update();
+
+      const xDifference = projectile.enemy.center.x - projectile.position.x;
+      const yDifference = projectile.enemy.center.y - projectile.position.y;
+      const distance = Math.hypot(xDifference, yDifference);
+      if (distance < projectile.enemy.radius + projectile.radius) {
+        building.projectiles.splice(i, 1);
+      }
+    }
+
+    // c.fillStyle='red'
+    // c.fillRect(x, 400, 100, 100)
+    // x++
+    // console.log('go')
+  });
 }
 
 // animate()
@@ -108,7 +126,7 @@ const mouse = {
 };
 
 canvas.addEventListener("click", (event) => {
-  console.log(buildings);
+  // console.log(buildings);
 
   if (activeTile && !activeTile.isOccupied) {
     buildings.push(
