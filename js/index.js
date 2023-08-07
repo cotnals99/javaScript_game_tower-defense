@@ -95,8 +95,9 @@ function animate() {
     if (enemy.position.x > canvas.width) {
       // console.log('Decrease hearts')
       hearts -= 1
+      console.log(hearts)
+      document.querySelector('#hearts').innerHTML = hearts
       enemies.splice(i, 1)
-      // console.log(hearts)
       // console.log('Enemies survived')
 
       if (hearts === 0){

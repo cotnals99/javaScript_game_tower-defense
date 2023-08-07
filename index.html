@@ -1,9 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap"
-  rel="stylesheet"
-/>
+<link href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap" rel="stylesheet" />
 
 <style>
     * {
@@ -24,9 +21,7 @@
 <body>
     <div style="position: relative; display: inline-block;">
         <canvas></canvas>
-        <div 
-        id="gameOver"
-        style="
+        <div id="gameOver" style="
         position: absolute; 
         top: 0; 
         bottom: 0; 
@@ -39,6 +34,30 @@
         color: white;
         -webkit-text-stroke: 3px black;
         ">Game Over</div>
+
+
+
+        <div style="
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 36px;
+    color: white;
+    -webkit-text-stroke: 3px black;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    ">
+            <svg style="width: 35px; color: red; margin-right: 5px" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <div id="hearts" style="width: 50px;">10</div>
+        </div>
+
     </div>
 </body>
 <script src="/js/placementTilesData.js"></script>
