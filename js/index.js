@@ -80,6 +80,7 @@ const buildings = [];
 let activeTile = undefined;
 let enemyCount = 3
 let hearts = 10
+let coins = 100
 
 spawnEnemies(enemyCount)
 
@@ -112,7 +113,7 @@ function animate() {
 //Enemy re-spawning
   if(enemies.length === 0) {
     // console.log(enemyCount)
-    enemyCount += 3
+    enemyCount += 2
     spawnEnemies(enemyCount)
   }
 
@@ -172,7 +173,11 @@ function animate() {
 
           //If multiple projectiles shoot the enemy, enemy might be dead before some projectiles hit the enemy
           // In this case, enemy index will show negative 1
-          if (enemyIndex > -1) enemies.splice(enemyIndex, 1)
+          if (enemyIndex > -1) {
+            coins += 25
+            document.querySelector('#coins').innerHTML = coins
+            enemies.splice(enemyIndex, 1)
+          }
         }
 
         building.projectiles.splice(i, 1);
@@ -196,7 +201,9 @@ const mouse = {
 canvas.addEventListener("click", (event) => {
   // console.log(buildings);
 
-  if (activeTile && !activeTile.isOccupied) {
+  if (activeTile && !activeTile.isOccupied && coins - 30 >= 0) {
+    coins -= 30
+    document.querySelector('#coins').innerHTML = coins
     buildings.push(
       new Building({
         position: {

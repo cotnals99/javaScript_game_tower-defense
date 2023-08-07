@@ -79,7 +79,7 @@ class Enemy {
     this.position.x += Math.cos(angle);
     this.position.y += Math.sin(angle);
 
-    const speed = 10
+    const speed = 3
 
     this.velocity.x = Math.cos(angle) * speed
     this.velocity.y = Math.sin(angle) * speed
@@ -139,7 +139,7 @@ class Projectile {
       this.enemy.center.x - this.position.x
     );
 
-    const power = 20;
+    const power = 5;
     this.velocity.x = Math.cos(angle) * power;
     this.velocity.y = Math.sin(angle) * power;
 
