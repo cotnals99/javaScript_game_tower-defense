@@ -96,13 +96,13 @@ function animate() {
     if (enemy.position.x > canvas.width) {
       // console.log('Decrease hearts')
       hearts -= 1
-      console.log(hearts)
+      // console.log(hearts)
       document.querySelector('#hearts').innerHTML = hearts
       enemies.splice(i, 1)
       // console.log('Enemies survived')
 
       if (hearts === 0){
-        console.log('Game Over')
+        // console.log('Game Over')
         document.querySelector('#gameOver').style.display = 'flex'
         window.cancelAnimationFrame(animationId)
       }
@@ -213,6 +213,9 @@ canvas.addEventListener("click", (event) => {
       })
     );
     activeTile.isOccupied = true;
+    buildings.sort((a, b)=>{
+      return a.position.y - b.position.y
+    })
   }
 });
 
