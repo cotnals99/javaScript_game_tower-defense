@@ -113,7 +113,7 @@ function animate() {
 //Enemy re-spawning
   if(enemies.length === 0) {
     // console.log(enemyCount)
-    enemyCount += 2
+    enemyCount += 3
     spawnEnemies(enemyCount)
   }
 
