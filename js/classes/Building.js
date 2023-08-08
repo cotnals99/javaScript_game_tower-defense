@@ -33,6 +33,8 @@ class Building extends Sprite {
     update() {
       this.draw();
 
+      if(this.target || !this.target && this.frames.current !==0 ) super.update()
+
       if (
         this.target &&
         this.frames.current === 6 &&

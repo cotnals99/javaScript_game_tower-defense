@@ -40,15 +40,16 @@ class Sprite {
             crop.width,
             crop.height
             )
+    }
 
-
-        // responsible for animation
-        this.frames.elapsed++
-        if(this.frames.elapsed % this.frames.hold === 0){
-            this.frames.current++
-            if(this.frames.current >= this.frames.max -1){
-                this.frames.current = 0
-            }
-        }
+    update(){
+                // responsible for animation
+                this.frames.elapsed++
+                if(this.frames.elapsed % this.frames.hold === 0){
+                    this.frames.current++
+                    if(this.frames.current >= this.frames.max -1){
+                        this.frames.current = 0
+                    }
+                }
     }
 }
