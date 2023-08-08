@@ -1,6 +1,7 @@
 //Building
-class Building {
-    constructor({ position = { x: 0, y: 0 } }) {
+class Building extends Sprite {
+    constructor({ position = { x: 0, y: 0 }}) {
+      super({position, imgSrc: 'img/tower.png', frames: {max: 19}})
       this.position = position;
       this.width = 64 * 2;
       this.height = 64;
@@ -11,11 +12,12 @@ class Building {
       this.projectiles = [];
       this.radius = 250;
       this.target;
-      this.frames = 0;
+      this.framesto = 0;
     }
     draw() {
-      c.fillStyle = "blue";
-      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+      super.draw()
+      // c.fillStyle = "blue";
+      // c.fillRect(this.position.x, this.position.y, this.width, this.height);
   
       c.beginPath();
       c.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2);
@@ -25,7 +27,7 @@ class Building {
   
     update() {
       this.draw();
-      if (this.frames % 100 === 0 && this.target) {
+      if (this.framesto % 100 === 0 && this.target) {
         this.projectiles.push(
           new Projectile({
             position: {
@@ -36,7 +38,7 @@ class Building {
           })
         );
       }
-      this.frames++;
+      this.framesto++;
     }
   }
   
